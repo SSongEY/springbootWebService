@@ -7,10 +7,9 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface HistoryRepository extends JpaRepository<History, Long> {
-//  History findByUsername(String username);
   List<History> findByUserIdOrderByIdDesc(Long user_id);
-  @Query(value = "select keyword from " +
+  @Query(value = "select keyword, count(keyword) as cnt from " +
           "(SELECT h.keyword keyword FROM HISTORY h group by h.user_id, h.keyword) " +
-          "group by keyword order by count(keyword) desc", nativeQuery = true)
-  List<String> fetchMostKeywords(Pageable pageable);
+          "group by keyword order by cnt desc", nativeQuery = true)
+  List<Object[]> fetchMostKeywords(Pageable pageable);
 }

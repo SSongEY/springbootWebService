@@ -6,7 +6,9 @@ $(document).ready(() => {
                   ordering: false,
                   searching: false,
                   lengthChange: false,
+                  paging: true,
                   info: false,
+                  sPaginationType : 'numbers',
                   ajax: function (data, callback, settings) {
                       let page = Math.floor(data.start / data.length) + 1;
                       let keyword = $('#keyword').val();
@@ -18,7 +20,8 @@ $(document).ready(() => {
                                   return false;
                               }
                               callback({
-                                  recordsTotal: response.meta.total_count,
+                                  recordsTotal: response.meta.pageable_count,
+                                  recordsFiltered: response.meta.pageable_count,
                                   data: response.documents
                               });
                           });
@@ -69,7 +72,8 @@ $(document).ready(() => {
                 $('#myHistoryList').append('<li>검색한 키워드가 없습니다.</li>');
               }
               $.each(history, function(i, item){
-                $('#myHistoryList').append('<li>'+item.keyword+'</li>');
+                console.log(item)
+                $('#myHistoryList').append('<li>'+item.keyword+' [조회 날짜: '+item.createdDate.replace('T',' ').split('.')[0]+']</li>');
               })
               $('#myHistoryModal').show();
           });
@@ -89,7 +93,7 @@ $(document).ready(() => {
                 $('#mostKeywordsList').append('<li>검색한 키워드가 없습니다.</li>');
               }
               $.each(keywords, function(i, item){
-                $('#mostKeywordsList').append('<li>'+item+'</li>');
+                $('#mostKeywordsList').append('<li>'+item[0]+' | '+item[1]+'</li>');
               })
               $('#mostKeywordsModal').show();
           });

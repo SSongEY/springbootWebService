@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.math.BigInteger;
 import java.util.List;
 
 
@@ -28,9 +29,9 @@ public class HistoryServiceTest {
 
   @Test
   public void 유저별_키워드_최신_히스토리_중복제거후_가져오기() {
-    Users user1 = usersRepository.findByUsername("testuser1");
-    Users user2 = usersRepository.findByUsername("testuser2");
-    Users user3 = usersRepository.findByUsername("testuser3");
+    Users user1 = usersRepository.findByUsername("testuser");
+    Users user2 = usersRepository.findByUsername("testuser1");
+    Users user3 = usersRepository.findByUsername("testuser2");
 
     user1.addHistory(History.builder().keyword("카카오뱅크").build());
     user1.addHistory(History.builder().keyword("카카오").build());
@@ -51,8 +52,11 @@ public class HistoryServiceTest {
     usersRepository.save(user2);
     usersRepository.save(user3);
 
-    //유저별 인기 검색 키워드 이기 때문에 유저별 키워드 중복제거 후 카운팅 이므로 1순위는 카카오뱅크
-    List<String> list = historyService.fetchMostKeywords(PageRequest.of(0, 10));
-    Assert.assertEquals("카카오뱅크", list.stream().findFirst().get());
+    //유저별 인기 검색 키워드 이기 때문에 유저별 키워드 중복제거 후 카운팅 이므로 1순위는 카카오뱅크이고 조회 수는 3회
+    List<Object[]> list = historyService.fetchMostKeywords(PageRequest.of(0, 10));
+
+    Assert.assertEquals("카카오뱅크", list.stream().findFirst().get()[0]);
+    // 조회 수
+    Assert.assertEquals(BigInteger.valueOf(3), list.stream().findFirst().get()[1]);
   }
 }

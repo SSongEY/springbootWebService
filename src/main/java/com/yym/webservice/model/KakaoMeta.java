@@ -21,4 +21,7 @@ public class KakaoMeta {
   @Column
   private Integer total_count;
 
+  @Column
+  private Integer pageable_count;
+
 }

@@ -15,7 +15,7 @@ public class HistoryServiceImpl implements HistoryService {
   HistoryRepository historyRepository;
 
   @Override
-  public List<String> fetchMostKeywords(Pageable pageable) {
+  public List<Object[]> fetchMostKeywords(Pageable pageable) {
     return historyRepository.fetchMostKeywords(pageable);
   }
 

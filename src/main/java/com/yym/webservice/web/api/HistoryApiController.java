@@ -17,7 +17,7 @@ public class HistoryApiController {
   HistoryService historyService;
 
   @GetMapping()
-  public List<String> fetchMostKeywords(){
+  public List<Object[]> fetchMostKeywords(){
     return historyService.fetchMostKeywords(PageRequest.of(0, 10));
   }
 }

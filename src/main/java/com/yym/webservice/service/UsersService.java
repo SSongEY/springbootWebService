@@ -45,7 +45,7 @@ public class UsersService implements UserDetailsService {
             .username(username)
             .build());
 
-    IntStream.range(1,3).forEach(i -> {
+    IntStream.range(1,4).forEach(i -> {
       usersRepository.save(Users.builder()
               .password(passwordEncoder.encode(password))
               .username(username+i)
