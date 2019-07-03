@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <link rel='stylesheet' href='/webjars/bootstrap/4.3.1/css/bootstrap.min.css'>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/datatables.min.css}"/>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/datatables.select.min.css}"/>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/myStyle.css}"/>
+
+        <script src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+        <script src='/webjars/bootstrap/4.3.1/js/bootstrap.min.js'></script>
+        <script type="text/javascript" th:src="@{/script/mySpringApi.js}"></script>
+        <script type="text/javascript" th:src="@{/script/search.js}"></script>
+        <script type="text/javascript" th:src="@{/script/datatables.min.js}"></script>
+        <script type="text/javascript" th:src="@{/script/datatables.select.min.js}"></script>
+        <script>
+            //팝업 Close 기능
+            function close_pop() {
+                 $('#myModal').hide();
+            };
+            function close_historyPop() {
+                 $('#myHistoryModal').hide();
+            };
+            function close_mostKeywordPop() {
+                 $('#mostKeywordsModal').hide();
+            };
+        </script>
+        <style>
+
+        </style>
+
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+            <div class="container">
+                <a class="navbar-brand" href="#">Project</a>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logoutProc">로그아웃</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <p></p>
+        <div class="container">
+            <h2>Search</h2>
+            <form id="kakaoApiForm" class="form-inline">
+                <div class="form-group">
+                    <label for="keyword" class="sr-only">Keyword Search</label>
+                    <input type="text" id="keyword" class="form-control" placeholder="keyword" required="true" autofocus=""/>
+                    <label>
+                        <button class="btn btn-primary" type="submit">검색하기</button>
+                    </label>
+                    <button id="myHistoryInfo" type="button" class="btn btn-info">검색한 키워드</button>
+                    <button id="mostKeywordsInfo" type="button" class="btn btn-secondary">인기 키워드</button>
+                </div>
+            </form>
+        </div><!-- /container -->
+
+
+        <div class="container">
+            <table class="table" id="kakaoApiTable">
+                <thead>
+                    <th>PLACE_NAME</th>
+                    <th>ADDRESS_NAME</th>
+                    <th>PHONE</th>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+
+        <div id="myModal" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <ul class="mylist">
+                    <li id="tableRowId"></li>
+                    <li id="tableRowPhone"></li>
+                    <li id="roadAddressName"></li>
+                    <li id="categoryName"></li>
+                    <li id="tableRowUrl"></li>
+                </ul>
+                <!--<span id="tableRowId">장소 : </span>-->
+
+                <div style="cursor:pointer;background-color:#DDDDDD;text-align: center;padding-bottom: 10px;padding-top: 10px;" onClick="close_pop();">
+                <span class="pop_bt" style="font-size: 13pt;" >
+                     닫기
+                </span>
+                </div>
+            </div>
+        </div>
+
+        <div id="myHistoryModal" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <ul class="mylist" id="myHistoryList">
+
+                </ul>
+                <div style="cursor:pointer;background-color:#DDDDDD;text-align: center;padding-bottom: 10px;padding-top: 10px;" onClick="close_historyPop();">
+                <span class="pop_bt" style="font-size: 13pt;" >
+                     닫기
+                </span>
+                </div>
+            </div>
+        </div>
+
+        <div id="mostKeywordsModal" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <ul class="mylist" id="mostKeywordsList">
+
+                </ul>
+                <div style="cursor:pointer;background-color:#DDDDDD;text-align: center;padding-bottom: 10px;padding-top: 10px;" onClick="close_mostKeywordPop();">
+                <span class="pop_bt" style="font-size: 13pt;" >
+                     닫기
+                </span>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

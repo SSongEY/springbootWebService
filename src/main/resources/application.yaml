@@ -1,0 +1,38 @@
+server:
+  port: 8080
+
+kakao:
+  apiKey: KakaoAK 61a56202c2c9102e80e996426ce1d0a7
+  keywordSearchUrl: https://dapi.kakao.com/v2/local/search/keyword.json?query=%s&page=%s&size=%s
+
+initialUsername: testuser
+initialPassword: qodzmrhkwp!@#
+###
+#   Database Settings
+###
+spring:
+  h2:
+    console:
+      enabled: true
+  datasource:
+    url: jdbc:h2:mem:yym;DB_CLOSE_ON_EXIT=FALSE;
+    platform: h2
+    username: sa
+    password:
+    driverClassName: org.h2.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    show_sql: false
+    use_sql_comments: false
+    format_sql: false
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Seoul
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+  devtools:
+    livereload:
+      enabled: false
+
