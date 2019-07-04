@@ -1,11 +1,15 @@
 # springbootWebService
 
+**Download Url**
+
+​	``
+
 **Build & Excute**
 
-​	`gradle build && java -jar build/libs/spring-webservice-0.0.1.jar`
+​	`java -jar spring-webservice-0.0.1.jar`
 
 **ROOT Page**
-​	URL : http://localhost:8080/
+​	URL : http://localhost:8080/index
 
 ## 기본 요구사항
 
